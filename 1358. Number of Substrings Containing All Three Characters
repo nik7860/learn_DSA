@@ -1,0 +1,35 @@
+class Solution:
+    def numberOfSubstrings(self, s: str) -> int:
+        count=0
+        l=0
+        seen={'a':0,'b':0,'c':0}
+        for i in range(0,len(s)):
+            seen[s[i]]+=1
+            while seen['a']>=1 and seen['b']>=1 and seen['c']>=1:
+                count+=len(s)-i
+                seen[s[l]]-=1
+                l=l+1 
+        return count
+
+
+
+
+*******************************************************************************
+class Solution:
+    def numberOfSubstrings(self, s: str) -> int:
+        count=0
+        l=0
+        r=0
+        seen={'a':0,'b':0,'c':0}
+        while r+3<=len(s):
+            if seen['a']>=1 and seen['b']>=1 and seen['c']>=1:
+                seen[s[r]]-=1
+                count+=len(s)-l+1
+                r=r+1
+            else:
+                if l<=len(s)-1:
+                    seen[s[l]]+=1
+                    l=l+1
+                else:
+                    break    
+        return count
