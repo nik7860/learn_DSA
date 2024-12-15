@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int checck(vector<int> &nums,int mid){
+        int s=0;
+        for(int i=0;i<nums.size();i++){
+            int c=ceil((double)nums[i]/mid);
+            s=s+c;
+        }
+        return s;
+    }
+    int smallestDivisor(vector<int>& nums, int threshold) {
+        
+        int low=1;
+        int high=*max_element(nums.begin(),nums.end());
+        int x=INT_MAX;
+        int ans=0;
+        while(low<high){
+            int mid=(low+high)/2;
+            int minn=checck(nums,mid);
+            if(minn<=threshold){
+                x=min(x,mid);
+                high=mid;
+                
+            }else{
+                low=mid+1;
+            }
+
+
+        }
+        return low;
+    }
+};
